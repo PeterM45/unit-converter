@@ -1,7 +1,10 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  experimental: {
+    // Optimize bundle size by tree-shaking icon imports
+    optimizePackageImports: ['lucide-react'],
+  },
 };
 
 export default nextConfig;
