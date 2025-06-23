@@ -127,7 +127,7 @@ export default function UnitConverter() {
     <div className="max-w-4xl mx-auto space-y-8">
       <div className="text-center space-y-4">
         <div className="flex items-center justify-center gap-3">
-          <h1 className="text-4xl font-bold text-foreground">Unit Converter</h1>
+          <h1 className="text-4xl font-bold">Unit Converter</h1>
           <Calculator className="h-8 w-8 text-primary" />
         </div>
         <p className="text-muted-foreground">
@@ -135,36 +135,30 @@ export default function UnitConverter() {
         </p>
       </div>
 
-      <Card className="border-border/50 shadow-lg">
+      <Card>
         <CardContent className="p-8 space-y-8">
           <div className="space-y-3">
-            <Label htmlFor="value" className="text-base font-medium">
-              Enter Value
-            </Label>
+            <Label htmlFor="value">Enter Value</Label>
             <Input
               id="value"
               placeholder="Enter a number"
               value={value}
               onChange={handleValueChange}
-              className="h-12 text-lg bg-input/50 border-border/50 focus:border-primary transition-colors"
+              className="h-12 text-lg"
               autoComplete="off"
             />
           </div>
 
           <div className="space-y-3">
-            <Label className="text-base font-medium">Category</Label>
+            <Label>Category</Label>
             <Select value={category} onValueChange={handleCategoryChange}>
-              <SelectTrigger className="h-12 bg-input/50 border-border/50 hover:border-primary/50 transition-colors px-4">
+              <SelectTrigger className="h-12">
                 <SelectValue placeholder="Select category" />
               </SelectTrigger>
-              <SelectContent className="bg-popover border-border/50">
+              <SelectContent>
                 {categories.map((cat) => (
-                  <SelectItem
-                    key={cat.id}
-                    value={cat.id}
-                    className="cursor-pointer py-3 px-4"
-                  >
-                    <div className="flex flex-col items-start">
+                  <SelectItem key={cat.id} value={cat.id}>
+                    <div>
                       <div className="font-medium">{cat.name}</div>
                       {cat.description && (
                         <div className="text-sm text-muted-foreground">
@@ -179,14 +173,14 @@ export default function UnitConverter() {
           </div>
 
           {category && availableUnits.length > 0 && (
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-end">
-              <div className="space-y-3 relative">
-                <Label className="text-base font-medium">From Unit</Label>
+            <div className="grid lg:grid-cols-3 gap-6 items-end">
+              <div className="space-y-3">
+                <Label>From Unit</Label>
                 <div className="relative">
-                  <Command className="border border-border/50 rounded-lg bg-input/50">
+                  <Command>
                     <CommandInput
                       placeholder="Search units"
-                      className="h-12 border-0"
+                      className="h-12"
                       value={
                         fromOpen ? undefined : findUnit(fromUnit)?.label || ''
                       }
@@ -197,9 +191,9 @@ export default function UnitConverter() {
                       onBlur={() => setTimeout(() => setFromOpen(false), 150)}
                     />
                     {fromOpen && (
-                      <div className="absolute top-full left-0 right-0 z-50 mt-1 animate-in fade-in-0 zoom-in-95 duration-200">
-                        <CommandList className="max-h-60 border border-border/50 rounded-lg bg-popover shadow-lg">
-                          <CommandEmpty className="py-3 px-4 text-sm text-muted-foreground">
+                      <div className="absolute top-full left-0 right-0 z-50 mt-1">
+                        <CommandList className="max-h-60 border rounded-lg bg-popover shadow-lg">
+                          <CommandEmpty className="p-4 text-sm text-muted-foreground">
                             No units found.
                           </CommandEmpty>
                           <CommandGroup>
@@ -211,7 +205,7 @@ export default function UnitConverter() {
                                   setFromUnit(unit.value);
                                   setFromOpen(false);
                                 }}
-                                className="cursor-pointer flex items-center justify-between py-3 px-4 hover:bg-accent/50 transition-colors"
+                                className="flex items-center justify-between p-3"
                               >
                                 <div className="flex items-center gap-2">
                                   <Check
@@ -241,24 +235,23 @@ export default function UnitConverter() {
 
               <div className="flex justify-center">
                 <Button
-                  type="button"
                   variant="outline"
                   size="icon"
                   onClick={handleSwap}
                   disabled={!fromUnit || !toUnit}
-                  className="h-12 w-12 rounded-full border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all duration-200"
+                  className="h-12 w-12 rounded-full"
                 >
                   <ArrowRightLeft className="h-5 w-5" />
                 </Button>
               </div>
 
-              <div className="space-y-3 relative">
-                <Label className="text-base font-medium">To Unit</Label>
+              <div className="space-y-3">
+                <Label>To Unit</Label>
                 <div className="relative">
-                  <Command className="border border-border/50 rounded-lg bg-input/50">
+                  <Command>
                     <CommandInput
                       placeholder="Search units"
-                      className="h-12 border-0"
+                      className="h-12"
                       value={toOpen ? undefined : findUnit(toUnit)?.label || ''}
                       onFocus={() => {
                         setToOpen(true);
@@ -267,9 +260,9 @@ export default function UnitConverter() {
                       onBlur={() => setTimeout(() => setToOpen(false), 150)}
                     />
                     {toOpen && (
-                      <div className="absolute top-full left-0 right-0 z-50 mt-1 animate-in fade-in-0 zoom-in-95 duration-200">
-                        <CommandList className="max-h-60 border border-border/50 rounded-lg bg-popover shadow-lg">
-                          <CommandEmpty className="py-3 px-4 text-sm text-muted-foreground">
+                      <div className="absolute top-full left-0 right-0 z-50 mt-1">
+                        <CommandList className="max-h-60 border rounded-lg bg-popover shadow-lg">
+                          <CommandEmpty className="p-4 text-sm text-muted-foreground">
                             No units found.
                           </CommandEmpty>
                           <CommandGroup>
@@ -281,7 +274,7 @@ export default function UnitConverter() {
                                   setToUnit(unit.value);
                                   setToOpen(false);
                                 }}
-                                className="cursor-pointer flex items-center justify-between py-3 px-4 hover:bg-accent/50 transition-colors"
+                                className="flex items-center justify-between p-3"
                               >
                                 <div className="flex items-center gap-2">
                                   <Check
@@ -313,51 +306,45 @@ export default function UnitConverter() {
 
           {result !== null && value && fromUnit && toUnit && (
             <Card className="border-primary/20 bg-primary/5">
-              <CardContent className="p-6">
-                <div className="text-center space-y-4">
-                  <p className="text-sm font-medium text-muted-foreground">
-                    Result
-                  </p>
-                  <div className="space-y-2">
-                    <p className="text-3xl font-bold text-foreground">
-                      {result.toLocaleString(undefined, {
-                        maximumFractionDigits: 12,
-                        minimumFractionDigits: 0,
-                      })}
-                    </p>
-                    <p className="text-muted-foreground">
-                      {findUnit(toUnit)?.symbol}
-                    </p>
-                  </div>
-
-                  {/* Conversion equation */}
-                  <div className="text-sm text-muted-foreground border-t pt-3">
-                    {value} {findUnit(fromUnit)?.symbol} ={' '}
+              <CardContent className="p-6 text-center space-y-4">
+                <p className="text-sm text-muted-foreground">Result</p>
+                <div className="space-y-2">
+                  <p className="text-3xl font-bold">
                     {result.toLocaleString(undefined, {
                       maximumFractionDigits: 12,
                       minimumFractionDigits: 0,
-                    })}{' '}
+                    })}
+                  </p>
+                  <p className="text-muted-foreground">
                     {findUnit(toUnit)?.symbol}
-                  </div>
-
-                  {/* Conversion factor */}
-                  {(() => {
-                    const conversionFactor = getConversionFactor();
-                    if (!conversionFactor) return null;
-
-                    return (
-                      <div className="text-xs text-muted-foreground/80 bg-muted/30 rounded-md px-3 py-2">
-                        <span className="font-medium">Note:</span> 1{' '}
-                        {conversionFactor.fromSymbol} ={' '}
-                        {conversionFactor.factor.toLocaleString(undefined, {
-                          maximumFractionDigits: 8,
-                          minimumFractionDigits: 0,
-                        })}{' '}
-                        {conversionFactor.toSymbol}
-                      </div>
-                    );
-                  })()}
+                  </p>
                 </div>
+
+                <div className="text-sm text-muted-foreground border-t pt-3">
+                  {value} {findUnit(fromUnit)?.symbol} ={' '}
+                  {result.toLocaleString(undefined, {
+                    maximumFractionDigits: 12,
+                    minimumFractionDigits: 0,
+                  })}{' '}
+                  {findUnit(toUnit)?.symbol}
+                </div>
+
+                {(() => {
+                  const conversionFactor = getConversionFactor();
+                  if (!conversionFactor) return null;
+
+                  return (
+                    <div className="text-xs text-muted-foreground bg-muted/30 rounded p-3">
+                      <span className="font-medium">Note:</span> 1{' '}
+                      {conversionFactor.fromSymbol} ={' '}
+                      {conversionFactor.factor.toLocaleString(undefined, {
+                        maximumFractionDigits: 8,
+                        minimumFractionDigits: 0,
+                      })}{' '}
+                      {conversionFactor.toSymbol}
+                    </div>
+                  );
+                })()}
               </CardContent>
             </Card>
           )}
