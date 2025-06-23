@@ -18,6 +18,15 @@ export default function Home() {
             >
               Peter 🖤
             </Link>
+            {' • '}
+            <Link
+              href="https://github.com/PeterM45/unit-converter"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground transition-colors underline"
+            >
+              View Source
+            </Link>
           </p>
         </footer>
       </div>
