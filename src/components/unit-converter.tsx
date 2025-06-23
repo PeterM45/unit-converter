@@ -152,7 +152,7 @@ export default function UnitConverter() {
           <div className="space-y-3">
             <Label>Category</Label>
             <Select value={category} onValueChange={handleCategoryChange}>
-              <SelectTrigger className="h-12">
+              <SelectTrigger>
                 <SelectValue placeholder="Select category" />
               </SelectTrigger>
               <SelectContent>
